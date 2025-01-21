@@ -20,10 +20,8 @@
 
     <Border>
         <Grid>
-            <!--<Grid.RowDefinitions>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>-->
+            
+             
             <Grid  Grid.Row="0" Margin="10,10,10,40">
                 <Image Source="{Binding UriImage , ElementName=parent}"></Image>
             </Grid>
@@ -34,6 +32,9 @@
                         <Run Text="{Binding Text , ElementName=parent}" />
                     </Paragraph>
                 </FlowDocument>
+                <RichTextBox.ContextMenu>
+                    <ContextMenu></ContextMenu>
+                </RichTextBox.ContextMenu>
             </RichTextBox>
             
         </Grid>

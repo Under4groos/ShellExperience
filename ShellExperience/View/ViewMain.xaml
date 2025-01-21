@@ -17,32 +17,38 @@
         <SolidColorBrush Color="White" Opacity="0.001"/>
     </UserControl.Background>
     <Grid x:Name="grid">
-        <Viewbox>
-            <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="{Binding ActualHeight, ElementName=parent, Mode=OneWay}" MaxWidth="{Binding ActualWidth, ElementName=parent, Mode=OneWay}">
-                <ItemsControl ItemsSource="{Binding Applications}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel VirtualizingStackPanel.IsVirtualizing="True" IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <local:AppExe Path="{Binding Path=Path}" UriImage="{Binding Path=PathIcon}" Text="{Binding Path=Name}">
-                                <local:AppExe.Triggers>
-                                    <EventTrigger RoutedEvent="Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"  To="1" Duration="00:00:1" />
+        <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="{Binding ActualHeight, ElementName=parent, Mode=OneWay}" MaxWidth="{Binding ActualWidth, ElementName=parent, Mode=OneWay}">
+            <ItemsControl ItemsSource="{Binding Applications}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel VirtualizingStackPanel.IsVirtualizing="True" IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:AppExe Path="{Binding Path=Path}" UriImage="{Binding Path=PathIcon}" Text="{Binding Path=Name}">
+                            <local:AppExe.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"  To="1" Duration="00:00:1" />
 
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </local:AppExe.Triggers>
-                            </local:AppExe>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Viewbox>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.5"  To="1" Duration="00:00:1" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </local:AppExe.Triggers>
+                        </local:AppExe>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

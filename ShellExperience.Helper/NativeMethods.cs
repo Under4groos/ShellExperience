@@ -15,10 +15,6 @@ namespace ShellExperience.Helper
 
 
         #region Screens 
-         
-
-
-
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool EnumDisplayMonitors(IntPtr hdc,
@@ -28,11 +24,18 @@ namespace ShellExperience.Helper
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFOEX lpmi);
+        #endregion
 
+        #region Keyboard
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, ModKeys fsModifiers, uint vk);
 
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
 
         #endregion
+
 
         [DllImport("user32.dll")]
         public static extern int DestroyIcon(IntPtr hIcon);

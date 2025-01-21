@@ -36,33 +36,34 @@ namespace ShellExperience.View
             InitializeComponent();
             this.DataContext = App.dataContextListApplications;
 
-            threadLoaded = new Thread(() => 
-            {
-                string pathIcon = string.Empty;
-                string nameExe = string.Empty;
-           
-                foreach (var df in Directory.GetFiles(@"C:\Users\UnderKo\Downloads").Concat(Directory.GetDirectories(@"C:\Users\UnderKo\Downloads")))
-                {
+            //threadLoaded = new Thread(() => 
+            //{
+            //    string pathIcon = string.Empty;
+            //    string nameExe = string.Empty;
+               
 
-                    if (NativeShell.ExtructIcon(df, ref pathIcon, ref nameExe))
-                    {
-                       
-                        this.Dispatcher.Invoke(() =>
-                        {
+            //    foreach (var df in Directory.GetFiles(@"C:\Users\UnderKo\Downloads").Concat(Directory.GetDirectories(@"C:\Users\UnderKo\Downloads")))
+            //    {
 
-                            App.dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
-                            {
-                                Name = nameExe,
-                                PathIcon = pathIcon,
-                                Path = df,
-                            });
-                        });
-                    };
-                    Thread.Sleep(10);
-                }
+            //        if (NativeShell.ExtructIcon(df, ref pathIcon, ref nameExe))
+            //        {
+
+            //            this.Dispatcher.Invoke(() =>
+            //            {
+
+            //                App.dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
+            //                {
+            //                    Name = nameExe,
+            //                    PathIcon = pathIcon,
+            //                    Path = df,
+            //                });
+            //            });
+            //        };
+            //        Thread.Sleep(10);
+            //    }
                 
-            });
-            threadLoaded.Start();  
+            //});
+            //threadLoaded.Start();  
 
 
 

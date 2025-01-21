@@ -17,7 +17,6 @@
         <SolidColorBrush Color="White" Opacity="0.001"/>
     </UserControl.Background>
     <Grid x:Name="grid">
-
         <Viewbox>
             <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="{Binding ActualHeight, ElementName=parent, Mode=OneWay}" MaxWidth="{Binding ActualWidth, ElementName=parent, Mode=OneWay}">
                 <ItemsControl ItemsSource="{Binding Applications}">
@@ -45,9 +44,5 @@
                 </ItemsControl>
             </ScrollViewer>
         </Viewbox>
-
-
-
-
     </Grid>
 </UserControl>

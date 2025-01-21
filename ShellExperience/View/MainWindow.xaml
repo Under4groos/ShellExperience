@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:View="clr-namespace:ShellExperience.View"
         mc:Ignorable="d" AllowsTransparency="True" WindowStyle="None"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Topmost="True"
+        >
     <Window.Style>
         <Style TargetType="{x:Type Window}">
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
                     <WindowChrome CaptionHeight="20"
-                                CornerRadius="16"
+                                CornerRadius="8"
                               GlassFrameThickness="0"
                               NonClientFrameEdges="None"
                               ResizeBorderThickness="5"

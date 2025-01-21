@@ -8,7 +8,15 @@
              x:Name="parent"
              Margin="5,5,5,5"
              Height="85" Width="120">
-
+    <UserControl.Background>
+        <SolidColorBrush Color="White" Opacity="0.001"></SolidColorBrush>
+    </UserControl.Background>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Click="ItemRemove" Header="Remove" />
+            <MenuItem Click="ItemShowInExplorer" Header="Show in Explorer" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
 
     <Border>
         <Grid>
@@ -16,10 +24,10 @@
                 <RowDefinition Height="9*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Grid  Grid.Row="0">
+            <Grid  Grid.Row="0" Margin="8">
                 <Image Source="{Binding UriImage , ElementName=parent}"></Image>
             </Grid>
-            <Label Foreground="White" HorizontalContentAlignment="Center" Content="{Binding Text , ElementName=parent }" Grid.Row="2"></Label>
+            <Label Foreground="White" HorizontalContentAlignment="Center" Content="{Binding Text , ElementName=parent }" Grid.Row="2" FontWeight="Bold"/>
         </Grid>
     </Border>
 </UserControl>

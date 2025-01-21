@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellExperience", "ShellExperience\ShellExperience.csproj", "{75ABD150-34C1-4821-913F-41586868C7AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellExperience.Helper", "ShellExperience.Helper\ShellExperience.Helper.csproj", "{B755F71B-C68D-43AB-ACA6-769A5EBDDC7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{75ABD150-34C1-4821-913F-41586868C7AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75ABD150-34C1-4821-913F-41586868C7AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75ABD150-34C1-4821-913F-41586868C7AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B755F71B-C68D-43AB-ACA6-769A5EBDDC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B755F71B-C68D-43AB-ACA6-769A5EBDDC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B755F71B-C68D-43AB-ACA6-769A5EBDDC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B755F71B-C68D-43AB-ACA6-769A5EBDDC7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

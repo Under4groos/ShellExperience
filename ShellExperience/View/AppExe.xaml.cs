@@ -1,6 +1,7 @@
 ﻿using ShellExperience.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace ShellExperience.View
             nameof(Text),
             typeof(object),
             typeof(AppExe), 
-            new PropertyMetadata("<NULL>")
+            new PropertyMetadata(default)
             );
 
         public object Text
@@ -34,7 +35,19 @@ namespace ShellExperience.View
             get { return (object)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+        // ============
+        public static readonly DependencyProperty PathProperty = DependencyProperty.Register(
+            nameof(Path),
+            typeof(string),
+            typeof(AppExe),
+            new PropertyMetadata(default)
+            );
 
+        public string Path
+        {
+            get { return (string)GetValue(PathProperty); }
+            set { SetValue(PathProperty, value); }
+        }
 
 
 
@@ -42,11 +55,8 @@ namespace ShellExperience.View
             nameof(UriImage),
             typeof(Uri),
             typeof(AppExe),
-            new PropertyMetadata(null)
+            new PropertyMetadata(default)
             );
-
-
-
         public Uri UriImage
         {
             get { return (Uri)GetValue(ImageProperty); }
@@ -61,12 +71,33 @@ namespace ShellExperience.View
         }
 
 
+        protected override void OnPreviewMouseRightButtonUp(MouseButtonEventArgs e)
+        {
+            
 
+            base.OnPreviewMouseRightButtonUp(e);
+        }
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            Debug.WriteLine($"{Text} {UriImage}");
+            base.OnPreviewMouseLeftButtonDown(e);
+        }
 
         public AppExe()
         {
             InitializeComponent();
              
         }
+
+        private void ItemRemove(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine($"[ItemRemove] {Text} {Path}");
+        }
+
+        private void ItemShowInExplorer(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine($"[ItemShowInExplorer] {Text} {Path}");
+        }
+ 
     }
 }

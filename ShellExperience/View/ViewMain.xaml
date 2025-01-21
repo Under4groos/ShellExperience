@@ -7,34 +7,47 @@
              xmlns:vm="clr-namespace:ShellExperience.ViewModel"
              xmlns:m="clr-namespace:ShellExperience.Model"
              mc:Ignorable="d" 
+             x:Name="parent"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:VMListApplications></vm:VMListApplications>
     </UserControl.DataContext>
-    
-    <Grid>
+    <UserControl.Background>
+        <SolidColorBrush Color="White" Opacity="0.001"/>
+    </UserControl.Background>
+    <Grid x:Name="grid">
+
+        <Viewbox>
+            <ScrollViewer  VerticalScrollBarVisibility="Hidden" MaxHeight="{Binding ActualHeight, ElementName=parent, Mode=OneWay}" MaxWidth="{Binding ActualWidth, ElementName=parent, Mode=OneWay}">
+                <ItemsControl ItemsSource="{Binding Applications}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VirtualizingStackPanel.IsVirtualizing="True" IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:AppExe Path="{Binding Path=Path}" UriImage="{Binding Path=PathIcon}" Text="{Binding Path=Name}">
+                                <local:AppExe.Triggers>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"  To="1" Duration="00:00:1" />
+
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </local:AppExe.Triggers>
+                            </local:AppExe>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Viewbox>
 
 
 
 
-        <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding Applications}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-
-                            <local:AppExe UriImage="{Binding Path=Path}" Text="{Binding Path=Name}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        
     </Grid>
 </UserControl>

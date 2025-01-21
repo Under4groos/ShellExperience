@@ -1,4 +1,5 @@
-﻿using ShellExperience.Model;
+﻿using ShellExperience.Helper.Collections;
+using ShellExperience.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,12 +13,12 @@ namespace ShellExperience.ViewModel
 {
     public class VMListApplications : BaseViewModel
     {
-        public ObservableCollection<ExecutableApplication> Applications { get; set; }
+        public ObservableRangeCollection<ExecutableApplication> Applications { get; set; }
 
 
         public VMListApplications()
         {
-            Applications = new ObservableCollection<ExecutableApplication>();
+            Applications = new ObservableRangeCollection<ExecutableApplication>();
         }
     }
 }

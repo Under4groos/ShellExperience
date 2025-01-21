@@ -1,6 +1,11 @@
-﻿using ShellExperience.ViewModel;
+﻿using ShellExperience.Helper;
+using ShellExperience.Model;
+using ShellExperience.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,30 +26,48 @@ namespace ShellExperience.View
     /// </summary>
     public partial class ViewMain : UserControl
     {
-        VMListApplications dataContextListApplications = new VMListApplications();
+        
+        Thread threadLoaded;
+
+        
+
         public ViewMain()
         {
             InitializeComponent();
-            for (int i = 0; i < 25; i++)
-            {
-                dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
-                {
-                    Name = "Name:" + i.ToString(),
-                    Path = @"C:\Users\UnderKo\Downloads\chrome_ociV6pcAeO.png",
-                });
-            }
-            this.DataContext = dataContextListApplications;
+            this.DataContext = App.dataContextListApplications;
 
-            this.MouseLeftButtonDown += (o, e) =>
+            threadLoaded = new Thread(() => 
             {
-                dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
-                {
-                    Name = "Name:" ,
-                    Path = "Path:" 
-                });
-
-            };
+                string pathIcon = string.Empty;
+                string nameExe = string.Empty;
            
+                foreach (var df in Directory.GetFiles(@"C:\Users\UnderKo\Downloads").Concat(Directory.GetDirectories(@"C:\Users\UnderKo\Downloads")))
+                {
+
+                    if (NativeShell.ExtructIcon(df, ref pathIcon, ref nameExe))
+                    {
+                       
+                        this.Dispatcher.Invoke(() =>
+                        {
+
+                            App.dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
+                            {
+                                Name = nameExe,
+                                PathIcon = pathIcon,
+                                Path = df,
+                            });
+                        });
+                    };
+                    Thread.Sleep(10);
+                }
+                
+            });
+            threadLoaded.Start();  
+
+
+
+
+
         }
     }
 }

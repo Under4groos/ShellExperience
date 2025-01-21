@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using ShellExperience.ViewModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Windows;
@@ -10,6 +11,8 @@ namespace ShellExperience
     /// </summary>
     public partial class App : Application
     {
+        public static VMListApplications dataContextListApplications = new VMListApplications();
+
         protected override void OnExit(ExitEventArgs e)
         {
             Debug.WriteLine("OnExit");

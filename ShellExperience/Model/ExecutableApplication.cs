@@ -12,7 +12,10 @@ namespace ShellExperience.Model
         {
             get;set;
         }
-
+        public string? PathIcon
+        {
+            get; set;
+        }
         public string? Path
         {
             get; set;

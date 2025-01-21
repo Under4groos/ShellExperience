@@ -1,4 +1,6 @@
-﻿using ShellExperience.Helper.Enums;
+﻿using ShellExperience.Helper.Delegates;
+using ShellExperience.Helper.Enums;
+using ShellExperience.Helper.Stuctures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +10,29 @@ using System.Threading.Tasks;
 
 namespace ShellExperience.Helper
 {
-    public class NativeMethods
+    public partial class NativeMethods
     {
-        public struct SHFILEINFO
-        {
-            public IntPtr hIcon;
-            public int iIcon;
-            public uint dwAttributes;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            public string szDisplayName;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
-            public string szTypeName;
-        };
+
+
+        #region Screens 
+         
+
+
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumDisplayMonitors(IntPtr hdc,
+                                               IntPtr lprcClip,
+                                               MonitorEnumDelegate lpfnEnum,
+                                               IntPtr dwData);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFOEX lpmi);
+
+
+
+
+        #endregion
 
         [DllImport("user32.dll")]
         public static extern int DestroyIcon(IntPtr hIcon);

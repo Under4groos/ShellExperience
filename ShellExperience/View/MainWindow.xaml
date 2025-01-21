@@ -23,7 +23,7 @@
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0.001"></SolidColorBrush>
     </Window.Background>
-    <Border Background="#1e1e1e" CornerRadius="8" BorderBrush="#404040" BorderThickness="1">
+    <Border Background="#1e1e1e">
         <View:ViewMain Margin="8"></View:ViewMain>
     </Border>
 </Window>

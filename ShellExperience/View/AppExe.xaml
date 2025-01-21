@@ -6,18 +6,18 @@
              xmlns:local="clr-namespace:ShellExperience.View" 
              xmlns:viewmodel="clr-namespace:ShellExperience.ViewModel" 
              x:Name="parent"
-             
-             Height="85" Width="100">
+             Margin="5,5,5,5"
+             Height="85" Width="120">
 
 
-    <Border BorderBrush="#094771" BorderThickness="1" CornerRadius="8">
+    <Border>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="9*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid  Grid.Row="0">
-                <Image></Image>
+                <Image Source="{Binding UriImage , ElementName=parent}"></Image>
             </Grid>
             <Label Foreground="White" HorizontalContentAlignment="Center" Content="{Binding Text , ElementName=parent }" Grid.Row="2"></Label>
         </Grid>

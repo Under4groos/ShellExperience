@@ -1,6 +1,7 @@
 ﻿using ShellExperience.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,31 @@ namespace ShellExperience.View
             get { return (object)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-            
+
+
+
+
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(
+            nameof(UriImage),
+            typeof(Uri),
+            typeof(AppExe),
+            new PropertyMetadata(null)
+            );
+
+
+
+        public Uri UriImage
+        {
+            get { return (Uri)GetValue(ImageProperty); }
+            set 
+            {
+                if (!File.Exists(value.AbsolutePath))
+                {
+                    return;
+                }
+                SetValue(ImageProperty, value); 
+            }
+        }
 
 
 

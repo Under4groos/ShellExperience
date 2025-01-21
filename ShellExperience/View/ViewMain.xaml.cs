@@ -30,12 +30,20 @@ namespace ShellExperience.View
                 dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
                 {
                     Name = "Name:" + i.ToString(),
-                    Path = "Path:" + i.ToString(),
+                    Path = @"C:\Users\UnderKo\Downloads\chrome_ociV6pcAeO.png",
                 });
             }
             this.DataContext = dataContextListApplications;
 
+            this.MouseLeftButtonDown += (o, e) =>
+            {
+                dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
+                {
+                    Name = "Name:" ,
+                    Path = "Path:" 
+                });
 
+            };
            
         }
     }

@@ -26,48 +26,22 @@ namespace ShellExperience.View
     /// </summary>
     public partial class ViewMain : UserControl
     {
-        
-        Thread threadLoaded;
-
-        
-
         public ViewMain()
         {
             InitializeComponent();
             this.DataContext = App.dataContextListApplications;
+        }
 
-            //threadLoaded = new Thread(() => 
-            //{
-            //    string pathIcon = string.Empty;
-            //    string nameExe = string.Empty;
-               
-
-            //    foreach (var df in Directory.GetFiles(@"C:\Users\UnderKo\Downloads").Concat(Directory.GetDirectories(@"C:\Users\UnderKo\Downloads")))
-            //    {
-
-            //        if (NativeShell.ExtructIcon(df, ref pathIcon, ref nameExe))
-            //        {
-
-            //            this.Dispatcher.Invoke(() =>
-            //            {
-
-            //                App.dataContextListApplications.Applications.Add(new Model.ExecutableApplication()
-            //                {
-            //                    Name = nameExe,
-            //                    PathIcon = pathIcon,
-            //                    Path = df,
-            //                });
-            //            });
-            //        };
-            //        Thread.Sleep(10);
-            //    }
-                
-            //});
-            //threadLoaded.Start();  
-
-
-
-
+        private void fileDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                foreach (var file in (string[])e.Data.GetData(DataFormats.FileDrop))
+                {
+                    App.dataContextListApplications.Append(this.Dispatcher, file);
+                }
+                App.Save();
+            }
 
         }
     }

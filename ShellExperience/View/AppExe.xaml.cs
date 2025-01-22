@@ -1,4 +1,5 @@
-﻿using ShellExperience.Model;
+﻿using ShellExperience.Helper;
+using ShellExperience.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -80,6 +81,9 @@ namespace ShellExperience.View
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             Debug.WriteLine($"{Text} {UriImage}");
+
+
+            Explorer.Start(this.Path);
             base.OnPreviewMouseLeftButtonDown(e);
         }
 
@@ -91,13 +95,27 @@ namespace ShellExperience.View
 
         private void ItemRemove(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i < App.dataContextListApplications.Applications.Count; i++)
+            {
+                if (App.dataContextListApplications.Applications[i].Path == Path)
+                {
+                    App.dataContextListApplications.RemoveAt(i);
+                }
+            }
             Debug.WriteLine($"[ItemRemove] {Text} {Path}");
+            App.Save();
         }
 
         private void ItemShowInExplorer(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine($"[ItemShowInExplorer] {Text} {Path}");
+
+            Explorer.Start("explorer.exe" , $"/select, \"{this.Path}\"");
         }
- 
+
+        private void ItemRunAsAdmin(object sender, RoutedEventArgs e)
+        {
+            Explorer.Start(this.Path , isadmin:true);
+        }
     }
 }

@@ -7,12 +7,13 @@
              xmlns:viewmodel="clr-namespace:ShellExperience.ViewModel" 
              x:Name="parent"
              Margin="5,5,5,5"
-             Height="85" Width="120">
+             Height="85" Width="140">
     <UserControl.Background>
         <SolidColorBrush Color="White" Opacity="0.001"></SolidColorBrush>
     </UserControl.Background>
     <UserControl.ContextMenu>
         <ContextMenu>
+            <MenuItem Click="ItemRunAsAdmin" Header="Run as Admin" />
             <MenuItem Click="ItemRemove" Header="Remove" />
             <MenuItem Click="ItemShowInExplorer" Header="Show in Explorer" />
         </ContextMenu>

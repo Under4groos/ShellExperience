@@ -1,6 +1,9 @@
-﻿using ShellExperience.Helper;
+﻿using Newtonsoft.Json;
+using ShellExperience.Helper;
+using ShellExperience.Helper.Extensions;
 using ShellExperience.Helper.Stuctures;
-using System.Collections.ObjectModel;
+using ShellExperience.ViewModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -10,30 +13,26 @@ namespace ShellExperience.View
 {
     public class NativeWindow : Window
     {
+        string jsonPath = "NativeWindow.json";
         public IntPtr HwndWindow
         {
             get
             {
-                
+
                 return new System.Windows.Interop.WindowInteropHelper(this).Handle;
             }
         }
-            
-        NativeBackgroundScreenWorker screenWorker = new NativeBackgroundScreenWorker()
+        private NativeBackgroundScreenWorker screenWorker = new NativeBackgroundScreenWorker()
         {
             TimeSleep = 100
         };
-
+        public System.Windows.Size SizeWindow = new System.Windows.Size(0, 0);
 
 
 
         protected override void OnInitialized(EventArgs e)
         {
             
-
-
-
-            this.SizeChanged += NativeWindow_SizeChanged;
             this.MouseLeave += NativeWindow_MouseLeave;
             this.MouseEnter += NativeWindow_MouseLeave;
 
@@ -45,26 +44,56 @@ namespace ShellExperience.View
             if (msg != 0x0312)
                 return IntPtr.Zero;
             this.Visibility = this.Visibility != Visibility.Visible ? Visibility.Visible : Visibility.Collapsed;
+            if (this.Visibility == Visibility.Collapsed)
+            {
+                App.viewMain.Save();
+                this.Save();
+            }
+
             _setCenter();
 
 
             return IntPtr.Zero;
         }
-        private void NativeWindow_Loaded(object sender, RoutedEventArgs e)
+        private void NativeWindow_Loaded(object sender, RoutedEventArgs eq)
         {
-            NativeMethods.RegisterHotKey(HwndWindow, (int)ModKeys.HOTKEY_ID, ModKeys.MOD_ALT, (uint)KeyInterop.VirtualKeyFromKey(Key.H));
+            this.Top = this.Left = -1000;
+            try
+            {
+                if (!File.Exists(jsonPath))
+                {
+                    
+                    this.Save();
+                }
+                var jsonObject = JsonConvert.DeserializeObject<System.Windows.Size>(File.ReadAllText(jsonPath));
+                if (jsonObject != null)
+                {
+                    SizeWindow = jsonObject;
+
+
+                    this.Width = SizeWindow.Width;
+                    this.Height = SizeWindow.Height;
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                Debug.WriteLine(e.Message);
+            }
+            
+
+            
+            this.Visibility = Visibility.Collapsed;
+
+
+            NativeMethods.RegisterHotKey(HwndWindow, (int)ModKeys.HOTKEY_ID, ModKeys.MOD_ALT, (uint)KeyInterop.VirtualKeyFromKey(Key.X));
             HwndSource source = PresentationSource.FromVisual(this) as HwndSource;
             if (source != null)
             {
                 source.AddHook(WndProc);
             }
-
-            if (App.Options.SizeWindow is System.Windows.Size sizeWindow)
-            {
-                this.Width = sizeWindow.Width;
-                this.Height = sizeWindow.Height;
-            }
-            _setCenter();
+           
         }
 
         private void NativeWindow_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -85,17 +114,12 @@ namespace ShellExperience.View
             base.OnClosed(e);
         }
 
-        private void NativeWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+         
+        public void Save()
         {
-            App.Options.SizeWindow = e.NewSize;
-
-
-
-
-
-
+            SizeWindow = new System.Windows.Size(this.Width, this.Height);
+            SizeWindow.ToFile(jsonPath);
         }
-
 
 
 

@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace ShellExperience.Model
 {
-    public struct AppSetting
+    public class AppSetting
     {
-        public ObservableRangeCollection<ExecutableApplication>? ListApplications;
-        public Size SizeWindow;
+        public ObservableRangeCollection<ExecutableApplication> ListApplications = new ObservableRangeCollection<ExecutableApplication>();
+        public Size SizeWindow = new Size();
     }
 }

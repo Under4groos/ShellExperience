@@ -1,5 +1,6 @@
 ﻿using ShellExperience.Helper;
 using ShellExperience.Model;
+using ShellExperience.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -92,18 +93,23 @@ namespace ShellExperience.View
             InitializeComponent();
              
         }
+        
 
         private void ItemRemove(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < App.dataContextListApplications.Applications.Count; i++)
+            if(App.viewMain.DataContext is VMListApplications DataContext)
             {
-                if (App.dataContextListApplications.Applications[i].Path == Path)
+                for (int i = 0; i < DataContext.Applications.Count; i++)
                 {
-                    App.dataContextListApplications.RemoveAt(i);
+                    if (DataContext.Applications[i].Path == Path)
+                    {
+                        DataContext.RemoveAt(i);
+                    }
                 }
+                Debug.WriteLine($"[ItemRemove] {Text} {Path}");
+                App.viewMain.Save();
             }
-            Debug.WriteLine($"[ItemRemove] {Text} {Path}");
-            App.Save();
+           
         }
 
         private void ItemShowInExplorer(object sender, RoutedEventArgs e)

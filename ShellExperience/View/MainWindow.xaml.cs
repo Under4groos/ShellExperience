@@ -16,7 +16,7 @@ namespace ShellExperience.View
     /// </summary>
     public partial class MainWindow : NativeWindow
     {
-        public MainWindow()
+        public MainWindow() : base()
         {
             InitializeComponent();
         }

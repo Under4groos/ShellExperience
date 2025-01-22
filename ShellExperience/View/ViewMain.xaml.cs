@@ -1,4 +1,6 @@
-﻿using ShellExperience.Helper;
+﻿using Newtonsoft.Json;
+using ShellExperience.Helper;
+using ShellExperience.Helper.Extensions;
 using ShellExperience.Model;
 using ShellExperience.ViewModel;
 using System;
@@ -26,10 +28,32 @@ namespace ShellExperience.View
     /// </summary>
     public partial class ViewMain : UserControl
     {
+        string jsonPath = "VMListApplications.json";
+        VMListApplications dataContextListApplications = new VMListApplications();
         public ViewMain()
         {
             InitializeComponent();
-            this.DataContext = App.dataContextListApplications;
+            this.Loaded += ViewMain_Loaded;
+            App.viewMain = this;
+            this.DataContext = dataContextListApplications;
+        }
+
+        private void ViewMain_Loaded(object sender, RoutedEventArgs eq)
+        {
+            try
+            {
+                var jsonObject = JsonConvert.DeserializeObject<VMListApplications>(File.ReadAllText(jsonPath));
+                if (jsonObject != null)
+                {
+                    dataContextListApplications.Applications.AddRange(jsonObject.Applications);
+                }
+                   
+            }
+            catch (Exception e)
+            {
+
+                Debug.WriteLine(e.Message);
+            }
         }
 
         private void fileDrop(object sender, DragEventArgs e)
@@ -38,11 +62,15 @@ namespace ShellExperience.View
             {
                 foreach (var file in (string[])e.Data.GetData(DataFormats.FileDrop))
                 {
-                    App.dataContextListApplications.Append(this.Dispatcher, file);
+                    dataContextListApplications.Append(this.Dispatcher, file);
                 }
-                App.Save();
+                this.Save();
             }
 
+        }
+        public void Save()
+        {
+            dataContextListApplications.ToFile(jsonPath);
         }
     }
 }

@@ -85,6 +85,7 @@ namespace ShellExperience.View
 
 
             Explorer.Start(this.Path);
+            App.HideMainWindow();
             base.OnPreviewMouseLeftButtonDown(e);
         }
 
@@ -115,13 +116,15 @@ namespace ShellExperience.View
         private void ItemShowInExplorer(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine($"[ItemShowInExplorer] {Text} {Path}");
-
             Explorer.Start("explorer.exe" , $"/select, \"{this.Path}\"");
+
+            App.HideMainWindow();
         }
 
         private void ItemRunAsAdmin(object sender, RoutedEventArgs e)
         {
             Explorer.Start(this.Path , isadmin:true);
+            App.HideMainWindow();
         }
     }
 }

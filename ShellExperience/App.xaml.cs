@@ -18,11 +18,15 @@ namespace ShellExperience
     {
 
         public static ViewMain viewMain;
+        public static MainWindow mainWindow;
+
+        public static void HideMainWindow()
+        {
+            App.mainWindow.Visibility = Visibility.Collapsed;
+        }
 
         protected override void OnExit(ExitEventArgs e)
         {
-          
-             
             Debug.WriteLine("OnExit");
             base.OnExit(e);
         }

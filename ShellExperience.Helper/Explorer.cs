@@ -17,6 +17,8 @@ namespace ShellExperience.Helper
 
         public static void Start(string path, string args = "", bool isadmin = false)
         {
+
+            
             try
             {
                 Process.Start(new ProcessStartInfo()

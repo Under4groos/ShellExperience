@@ -27,9 +27,6 @@ namespace ShellExperience.View
             TimeSleep = 100
         };
         public System.Windows.Size SizeWindow = new System.Windows.Size(0, 0);
-
-
-
         protected override void OnInitialized(EventArgs e)
         {
             
@@ -49,10 +46,7 @@ namespace ShellExperience.View
                 App.viewMain.Save();
                 this.Save();
             }
-
-            _setCenter();
-
-
+            SetWindowCenter();
             return IntPtr.Zero;
         }
         private void NativeWindow_Loaded(object sender, RoutedEventArgs eq)
@@ -98,30 +92,24 @@ namespace ShellExperience.View
 
         private void NativeWindow_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            _setCenter();
+            SetWindowCenter();
         }
 
-        void _setCenter()
+        void SetWindowCenter()
         {
             var size = screenWorker.listMonitors.First().WorkArea.GetSize();
             this.Left = size.Width / 2 - this.ActualWidth / 2;
             this.Top = size.Height - this.ActualHeight;
         }
-
         protected override void OnClosed(EventArgs e)
         {
             NativeMethods.UnregisterHotKey(HwndWindow, (int)ModKeys.HOTKEY_ID);
             base.OnClosed(e);
         }
-
-         
         public void Save()
         {
             SizeWindow = new System.Windows.Size(this.Width, this.Height);
             SizeWindow.ToFile(jsonPath);
         }
-
-
-
     }
 }

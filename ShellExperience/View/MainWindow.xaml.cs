@@ -19,6 +19,7 @@ namespace ShellExperience.View
         public MainWindow() : base()
         {
             InitializeComponent();
+            App.mainWindow = this;
         }
         
         

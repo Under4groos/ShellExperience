@@ -81,7 +81,7 @@ namespace ShellExperience.View
             this.Visibility = Visibility.Collapsed;
 
 
-            NativeMethods.RegisterHotKey(HwndWindow, (int)ModKeys.HOTKEY_ID, ModKeys.MOD_ALT, (uint)KeyInterop.VirtualKeyFromKey(Key.X));
+            NativeMethods.RegisterHotKey(HwndWindow, (int)ModKeys.HOTKEY_ID, ModKeys.MOD_ALT, (uint)KeyInterop.VirtualKeyFromKey(Key.H));
             HwndSource source = PresentationSource.FromVisual(this) as HwndSource;
             if (source != null)
             {

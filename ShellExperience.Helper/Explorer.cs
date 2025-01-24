@@ -15,22 +15,25 @@ namespace ShellExperience.Helper
 
 
 
-        public static void Start(string path, string args = "", bool isadmin = false)
+        public static void Start(string path, string args = "", bool workingDirectory = false, bool isadmin = false)
         {
 
-            
+
             try
             {
-                Process.Start(new ProcessStartInfo()
+                var procInfo = new ProcessStartInfo()
                 {
                     UseShellExecute = true,
                     FileName = path,
                     Arguments = args,
+                    WorkingDirectory = workingDirectory ? Path.GetDirectoryName(path) : default,
 
-                     
+
                     Verb = (isadmin && Path.GetExtension(path).ToLower() == ".exe") ? "runas" : string.Empty,
                     // && IsRunAsAdmin()
-                });
+                };
+
+                Process.Start(procInfo);
             }
             catch (Exception e)
             {

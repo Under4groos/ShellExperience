@@ -84,7 +84,7 @@ namespace ShellExperience.View
             Debug.WriteLine($"{Text} {UriImage}");
 
 
-            Explorer.Start(this.Path);
+            Explorer.Start(this.Path , workingDirectory:true);
             App.HideMainWindow();
             base.OnPreviewMouseLeftButtonDown(e);
         }
@@ -123,7 +123,7 @@ namespace ShellExperience.View
 
         private void ItemRunAsAdmin(object sender, RoutedEventArgs e)
         {
-            Explorer.Start(this.Path , isadmin:true);
+            Explorer.Start(this.Path , isadmin:true , workingDirectory: true);
             App.HideMainWindow();
         }
     }

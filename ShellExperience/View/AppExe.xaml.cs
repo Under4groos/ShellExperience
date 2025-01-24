@@ -48,7 +48,13 @@ namespace ShellExperience.View
         public string Path
         {
             get { return (string)GetValue(PathProperty); }
-            set { SetValue(PathProperty, value); }
+            set 
+            {
+
+                
+
+                SetValue(PathProperty, value); 
+            }
         }
 
 
@@ -64,11 +70,8 @@ namespace ShellExperience.View
             get { return (Uri)GetValue(ImageProperty); }
             set 
             {
-                if (!File.Exists(value.AbsolutePath))
-                {
-                    return;
-                }
-                SetValue(ImageProperty, value); 
+                 
+                SetValue(ImageProperty, File.Exists(value.AbsolutePath)? value : new Uri(string.Empty)); 
             }
         }
 

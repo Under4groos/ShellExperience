@@ -45,9 +45,26 @@ namespace ShellExperience.View
                 var jsonObject = JsonConvert.DeserializeObject<VMListApplications>(File.ReadAllText(jsonPath));
                 if (jsonObject != null)
                 {
-                    dataContextListApplications.Applications.AddRange(jsonObject.Applications);
-                }
+                    for (global::System.Int32 i = 0; i < jsonObject.Applications.Count; i++)
+                    {
+                        var exeApp = jsonObject.Applications[i];
+                        string PathIcon = "", nameExe = "";
+                        NativeShell.ExtructIcon(exeApp.Path, ref PathIcon, ref nameExe);
+
+                        exeApp.PathIcon = PathIcon;
+                        exeApp.Name = nameExe;
+
+                        dataContextListApplications.Applications.Add(exeApp);
+
+
+                    }
                    
+
+
+
+
+                }
+
             }
             catch (Exception e)
             {

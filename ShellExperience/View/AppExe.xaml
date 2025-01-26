@@ -19,14 +19,16 @@
         </ContextMenu>
     </UserControl.ContextMenu>
 
-    <Border>
+    <Border Background="{StaticResource _b}">
         <Grid>
-            
-             
             <Grid  Grid.Row="0" Margin="10,10,10,40">
-                <Image Source="{Binding UriImage , ElementName=parent}"></Image>
+                <Image x:Name="_img" Source="{Binding UriImage , ElementName=parent}">
+                    <Image.Effect>
+                        <DropShadowEffect   BlurRadius="7" ShadowDepth="10" Direction="-70" Color="#2e2e2e" Opacity="0.3"/>
+                    </Image.Effect>
+                </Image>
             </Grid>
-
+            
             <RichTextBox Margin="5" IsEnabled="False" BorderThickness="0" HorizontalContentAlignment="Center" Background="Transparent" VerticalAlignment="Bottom" Foreground="White" FontSize="10" FontWeight="Bold">
                 <FlowDocument TextAlignment="Center">
                     <Paragraph>

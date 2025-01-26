@@ -28,7 +28,7 @@ namespace ShellExperience.View
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             nameof(Text),
             typeof(object),
-            typeof(AppExe), 
+            typeof(AppExe),
             new PropertyMetadata(default)
             );
 
@@ -48,12 +48,12 @@ namespace ShellExperience.View
         public string Path
         {
             get { return (string)GetValue(PathProperty); }
-            set 
+            set
             {
 
-                
 
-                SetValue(PathProperty, value); 
+
+                SetValue(PathProperty, value);
             }
         }
 
@@ -68,17 +68,17 @@ namespace ShellExperience.View
         public Uri UriImage
         {
             get { return (Uri)GetValue(ImageProperty); }
-            set 
+            set
             {
-                 
-                SetValue(ImageProperty, File.Exists(value.AbsolutePath)? value : new Uri(string.Empty)); 
+
+                SetValue(ImageProperty, File.Exists(value.AbsolutePath) ? value : new Uri(string.Empty));
             }
         }
 
 
         protected override void OnPreviewMouseRightButtonUp(MouseButtonEventArgs e)
         {
-            
+
 
             base.OnPreviewMouseRightButtonUp(e);
         }
@@ -87,7 +87,7 @@ namespace ShellExperience.View
             Debug.WriteLine($"{Text} {UriImage}");
 
 
-            Explorer.Start(this.Path , workingDirectory:true);
+            Explorer.Start(this.Path, workingDirectory: true);
             App.HideMainWindow();
             base.OnPreviewMouseLeftButtonDown(e);
         }
@@ -95,13 +95,28 @@ namespace ShellExperience.View
         public AppExe()
         {
             InitializeComponent();
-             
+            this.MouseEnter += AppExe_MouseEnter;
+            this.MouseLeave += AppExe_MouseLeave;
         }
-        
+
+        private void AppExe_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _img.RenderTransform = new ScaleTransform(scaleX: 1, scaleY: 1, centerX: 0.5, centerY: 0.5);
+        }
+
+        private void AppExe_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+            _img.RenderTransform = new ScaleTransform(scaleX: 1.2, scaleY: 1.2, centerX:8, centerY: 8);
+        }
+
+
+
+
 
         private void ItemRemove(object sender, RoutedEventArgs e)
         {
-            if(App.viewMain.DataContext is VMListApplications DataContext)
+            if (App.viewMain.DataContext is VMListApplications DataContext)
             {
                 for (int i = 0; i < DataContext.Applications.Count; i++)
                 {
@@ -113,20 +128,20 @@ namespace ShellExperience.View
                 Debug.WriteLine($"[ItemRemove] {Text} {Path}");
                 App.viewMain.Save();
             }
-           
+
         }
 
         private void ItemShowInExplorer(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine($"[ItemShowInExplorer] {Text} {Path}");
-            Explorer.Start("explorer.exe" , $"/select, \"{this.Path}\"");
+            Explorer.Start("explorer.exe", $"/select, \"{this.Path}\"");
 
             App.HideMainWindow();
         }
 
         private void ItemRunAsAdmin(object sender, RoutedEventArgs e)
         {
-            Explorer.Start(this.Path , isadmin:true , workingDirectory: true);
+            Explorer.Start(this.Path, isadmin: true, workingDirectory: true);
             App.HideMainWindow();
         }
     }

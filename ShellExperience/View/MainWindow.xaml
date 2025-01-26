@@ -25,7 +25,8 @@
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0.001"></SolidColorBrush>
     </Window.Background>
-    <Border Background="#1e1e1e">
+     
+    <Border Background="{StaticResource _b2}">
         <View:ViewMain Margin="8"></View:ViewMain>
     </Border>
 </View:NativeWindow>

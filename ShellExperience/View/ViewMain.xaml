@@ -36,14 +36,14 @@
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseEnter">
+                                <!--<EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.5"  To="1" Duration="00:00:1" />
 
                                         </Storyboard>
                                     </BeginStoryboard>
-                                </EventTrigger>
+                                </EventTrigger>-->
                             </local:AppExe.Triggers>
                         </local:AppExe>
                     </DataTemplate>
